@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام ERP شامل</title>
+    <!-- Bootstrap RTL CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts - Cairo -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      :root {
+        --primary-color: #2563eb;
+        --secondary-color: #10b981;
+        --accent-color: #f59e0b;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --bg-light: #f8fafc;
+        --white: #ffffff;
+        --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --gradient-primary: linear-gradient(135deg,  #428315cc 0%, #0B555E 100%);
+        --gradient-secondary: linear-gradient(100deg, #17aabd, #3fd6dd);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        overflow-x: hidden;
+        direction: rtl;
+      }
+
+      /* Typography */
+      .text-gradient {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Navigation */
+      .navbar {
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .navbar-brand i {
+        color: var(--primary-color);
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        transition: color 0.3s ease;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: var(--primary-color) !important;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        min-height: 100vh;
+        position: relative;
+        background: linear-gradient(135deg,  #428315cc 0%, #0B555E 100%);
+        background-attachment: fixed;
+        padding-top: 80px;
+        overflow: hidden;
+      }
+
+      .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            #0B555E 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            #428315cc 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            #3fd6dd 0%,
+            transparent 50%
+          );
+      }
+
+      .floating-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .floating-element {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.1);
+        font-size: 2rem;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .floating-element:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-element:nth-child(2) {
+        top: 60%;
+        left: 90%;
+        animation-delay: 2s;
+      }
+
+      .floating-element:nth-child(3) {
+        top: 30%;
+        left: 80%;
+        animation-delay: 4s;
+      }
+
+      .floating-element:nth-child(4) {
+        top: 80%;
+        left: 20%;
+        animation-delay: 1s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+      }
+
+      /* Hero Content */
+      .hero-content {
+        color: white;
+        z-index: 2;
+        position: relative;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); */
+      }
+
+      .hero-description {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        max-width: 600px;
+      }
+
+      /* Buttons */
+      .hero-buttons .btn {
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+        border: none;
+      }
+
+      .demo-btn {
+        background: var(--gradient-primary);
+        color: white;
+      }
+
+      .demo-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        background: var(--gradient-primary);
+        color: white;
+      }
+
+      .whatsapp-btn {
+        background: #25d366;
+        color: white;
+      }
+
+      .whatsapp-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        background: #128c7e;
+        color: white;
+      }
+
+      /* Features Icons */
+      .features-icons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+      }
+
+      .feature-icon:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+
+      /* Devices Showcase */
+      .hero-image {
+        position: relative;
+        height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .devices-showcase {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        animation: showcaseFloat 6s ease-in-out infinite;
+      }
+
+      @keyframes showcaseFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .device {
+        position: absolute;
+        border-radius: 15px;
+        box-shadow: var(--shadow-lg);
+        background: #1f2937;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .device:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Laptop */
+      .laptop {
+        width: 450px;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px 10px 5px 5px;
+        animation: deviceFloat 4s ease-in-out infinite;
+      }
+
+      @keyframes deviceFloat {
+        0%,
+        100% {
+          transform: translate(-50%, -50%) translateY(0px);
+        }
+        50% {
+          transform: translate(-50%, -50%) translateY(-8px);
+        }
+      }
+
+      /* Mobile */
+      .mobile {
+        width: 80px;
+        height: 150px;
+        top: 20%;
+        right: 20%;
+        border-radius: 20px;
+        animation: deviceFloat 4s ease-in-out infinite 1s;
+      }
+
+      /* Tablet */
+      .tablet {
+        width: 120px;
+        height: 180px;
+        bottom: 15%;
+        left: 15%;
+        border-radius: 15px;
+        animation: deviceFloat 4s ease-in-out infinite 2s;
+      }
+
+      .screen {
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-secondary);
+        padding: 10px;
+        border-radius: inherit;
+      }
+
+      /* Dashboard Simulation */
+      .dashboard {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 8px;
+        padding: 8px;
+        display: grid;
+        grid-template: "header header" 30px "sidebar content" 1fr / 60px 1fr;
+        gap: 8px;
+      }
+
+      .dashboard-header {
+        grid-area: header;
+        background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 100%);
+        border-radius: 4px;
+      }
+
+      .dashboard-sidebar {
+        grid-area: sidebar;
+        background: linear-gradient(180deg, #f9fafb 0%, #e5e7eb 100%);
+        border-radius: 4px;
+      }
+
+      .dashboard-content {
+        grid-area: content;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .chart-area {
+        flex: 1;
+        background: #f8fafc;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stats-cards {
+        display: flex;
+        gap: 4px;
+        height: 40px;
+      }
+
+      .stat-card {
+        flex: 1;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        border-radius: 4px;
+      }
+
+      /* Mobile App */
+      .mobile-app {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 15px;
+        padding: 8px;
+      }
+
+      .app-header {
+        height: 20px;
+        background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 100%);
+        border-radius: 3px;
+        margin-bottom: 8px;
+      }
+
+      .app-icons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .app-icon {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 6px;
+      }
+
+      /* Tablet Interface */
+      .tablet-interface {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 12px;
+        padding: 8px;
+      }
+
+      .interface-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        height: 100%;
+      }
+
+      .grid-item {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        border-radius: 6px;
+      }
+
+      /* Accessories */
+      .accessory {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        backdrop-filter: blur(10px);
+        animation: accessoryFloat 5s ease-in-out infinite;
+      }
+
+      .calculator {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .gear {
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 2s;
+        animation: rotateFloat 8s linear infinite;
+      }
+
+      .chart {
+        top: 30%;
+        right: 30%;
+        animation-delay: 1s;
+      }
+
+      @keyframes accessoryFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      @keyframes rotateFloat {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scroll Indicator */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.5rem;
+        /* animation: bounce 2s infinite; */
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      /* Features Section */
+      .features-section {
+        background: var(--bg-light);
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-light);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .feature-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: white;
+        font-size: 2rem;
+      }
+
+      .feature-card h5 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      .feature-card p {
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .hero-section {
+          padding-top: 100px;
+        }
+
+        .hero-content {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .hero-image {
+          height: 400px;
+        }
+
+        .laptop {
+          width: 250px;
+          height: 160px;
+        }
+
+        .mobile {
+          width: 60px;
+          height: 110px;
+        }
+
+        .tablet {
+          width: 90px;
+          height: 140px;
+        }
+
+        .features-icons {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-buttons {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .hero-buttons .btn {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .devices-showcase {
+          height: 300px;
+        }
+
+        .laptop {
+          width: 200px;
+          height: 130px;
+        }
+
+        .mobile {
+          width: 50px;
+          height: 90px;
+        }
+
+        .tablet {
+          width: 70px;
+          height: 110px;
+        }
+
+        .accessory {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Loading Animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Tooltip Styling */
+      .tooltip {
+        font-family: "Cairo", sans-serif;
+      }
+
+      /* Animation Classes */
+      .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Button Loading State */
+      .btn-loading {
+        position: relative;
+        color: transparent;
+      }
+
+      .btn-loading::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: auto;
+        border: 2px solid transparent;
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        animation: spin 1s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="#">
+          <i class="fas fa-chart-line me-2"></i>
+          نظام ERP
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">الرئيسية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features">الميزات</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">تواصل معنا</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-background">
+        <div class="floating-elements">
+          <div class="floating-element" data-speed="2">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <div class="floating-element" data-speed="3">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <div class="floating-element" data-speed="1.5">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <div class="floating-element" data-speed="2.5">
+            <i class="fas fa-cog"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row align-items-center min-vh-100">
+          <!-- Content Column -->
+          <div class="col-lg-6 order-lg-2">
+            <div class="hero-content" data-aos="fade-right">
+              <h1 class="hero-title mb-4">
+                نظام <span class="text-gradient">ERP شامل</span>
+                <br />
+                تخصيص مرن، دعم فني مستمر
+              </h1>
+
+              <p class="hero-description mb-4">
+                برنامج رائد ERP هو الحل الأمثل الذي يلبي احتياجات إدارة أعمالك،
+                تم تطويره باستخدام أحدث التقنيات المتقدمة لضمان السرعة والأداء
+                الأمثل. فريق دعم البرنامج يعمل بمعايا التطور المستمر كضمان
+                للنجاح منذ بداية تأسيسه!
+              </p>
+
+              <div class="hero-buttons mb-4">
+                <button class="btn btn-primary btn-lg me-3 demo-btn">
+                  <i class="fas fa-play me-2"></i>
+                  نسخة تجريبية
+                </button>
+                <button class="btn btn-success btn-lg whatsapp-btn">
+                  <i class="fab fa-whatsapp me-2"></i>
+                  تواصل واتساب
+                </button>
+              </div>
+
+              <!-- Features Icons -->
+              <div class="features-icons">
+                <div
+                  class="feature-icon"
+                  data-bs-toggle="tooltip"
+                  title="إدارة المخزون"
+                >
+                  <i class="fas fa-boxes"></i>
+                </div>
+                <div
+                  class="feature-icon"
+                  data-bs-toggle="tooltip"
+                  title="التقارير المالية"
+                >
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <div
+                  class="feature-icon"
+                  data-bs-toggle="tooltip"
+                  title="إدارة العملاء"
+                >
+                  <i class="fas fa-users"></i>
+                </div>
+                <div
+                  class="feature-icon"
+                  data-bs-toggle="tooltip"
+                  title="الفواتير"
+                >
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image Column -->
+          <div class="col-lg-6 order-lg-1">
+            <div class="hero-image" data-aos="fade-left">
+              <div class="devices-showcase">
+                <!-- Laptop -->
+                <div class="device laptop" data-device="laptop">
+                  <!-- <div class="screen">
+                    <div class="dashboard">
+                      <div class="dashboard-header"></div>
+                      <div class="dashboard-sidebar"></div>
+                      <div class="dashboard-content">
+                        <div class="chart-area">
+                          <canvas id="sampleChart"></canvas>
+                        </div>
+                        <div class="stats-cards">
+                          <div class="stat-card"></div>
+                          <div class="stat-card"></div>
+                          <div class="stat-card"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                <img src="./assets/img/login.png" alt="">
+                </div>
+
+                <!-- <div class="device mobile" data-device="mobile">
+                  <div class="screen">
+                    <div class="mobile-app">
+                      <div class="app-header"></div>
+                      <div class="app-content">
+                        <div class="app-icons">
+                          <div class="app-icon"></div>
+                          <div class="app-icon"></div>
+                          <div class="app-icon"></div>
+                          <div class="app-icon"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="device tablet" data-device="tablet">
+                  <div class="screen">
+                    <div class="tablet-interface">
+                      <div class="interface-grid">
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                        <div class="grid-item"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+                <!-- Accessories -->
+                <div class="accessory calculator">
+                  <i class="fas fa-calculator"></i>
+                </div>
+                <div class="accessory gear">
+                  <i class="fas fa-cog"></i>
+                </div>
+                <div class="accessory chart">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-title">مميزات النظام</h2>
+            <p class="section-subtitle">
+              حلول متكاملة لإدارة أعمالك بكفاءة عالية
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card h-100">
+              <div class="feature-icon-wrapper">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h5>تطبيق متنقل</h5>
+              <p>تحكم في نظامك من أي مكان عبر التطبيق المتنقل</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card h-100">
+              <div class="feature-icon-wrapper">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h5>تقارير تحليلية</h5>
+              <p>تقارير شاملة ومفصلة لمتابعة أداء أعمالك</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card h-100">
+              <div class="feature-icon-wrapper">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h5>أمان عالي</h5>
+              <p>حماية متقدمة لبياناتك مع النسخ الاحتياطي التلقائي</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="feature-card h-100">
+              <div class="feature-icon-wrapper">
+                <i class="fas fa-headset"></i>
+              </div>
+              <h5>دعم فني 24/7</h5>
+              <p>فريق دعم فني متخصص متاح على مدار الساعة</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Main JavaScript File
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeApp();
+      });
+
+      function initializeApp() {
+        // Initialize tooltips
+        initializeTooltips();
+
+        // Initialize button handlers
+        initializeButtons();
+
+        // Initialize scroll effects
+        initializeScrollEffects();
+
+        // Initialize device interactions
+        initializeDeviceInteractions();
+
+        // Initialize floating elements
+        initializeFloatingElements();
+      }
+
+      // Initialize Bootstrap Tooltips
+      function initializeTooltips() {
+        const tooltipTriggerList = [].slice.call(
+          document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        );
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl, {
+            placement: "top",
+            trigger: "hover",
+          });
+        });
+      }
+
+      // Initialize Button Handlers
+      function initializeButtons() {
+        const demoBtn = document.querySelector(".demo-btn");
+        const whatsappBtn = document.querySelector(".whatsapp-btn");
+
+        if (demoBtn) {
+          demoBtn.addEventListener("click", handleDemoClick);
+        }
+
+        if (whatsappBtn) {
+          whatsappBtn.addEventListener("click", handleWhatsAppClick);
+        }
+      }
+
+      // Handle Demo Button Click
+      function handleDemoClick(e) {
+        e.preventDefault();
+        const btn = e.target.closest(".btn");
+
+        // Add loading state
+        btn.classList.add("btn-loading");
+        btn.disabled = true;
+
+        // Simulate demo request
+        setTimeout(() => {
+          btn.classList.remove("btn-loading");
+          btn.disabled = false;
+
+          // Show success message or redirect
+          showNotification("تم تسجيل طلب النسخة التجريبية بنجاح!", "success");
+        }, 2000);
+      }
+
+      // Handle WhatsApp Button Click
+      function handleWhatsAppClick(e) {
+        e.preventDefault();
+        const message = encodeURIComponent(
+          "مرحباً، أرغب في الاستفسار عن نظام ERP الخاص بكم"
+        );
+        const phoneNumber = "1234567890"; // Replace with actual phone number
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+        window.open(whatsappUrl, "_blank");
+      }
+
+      // Show Notification
+      function showNotification(message, type = "info") {
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = `
+        top: 100px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        max-width: 500px;
+    `;
+
+        notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+        document.body.appendChild(notification);
+
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+          if (notification.parentElement) {
+            notification.remove();
+          }
+        }, 5000);
+      }
+
+      // Initialize Device Interactions
+      function initializeDeviceInteractions() {
+        const devices = document.querySelectorAll(".device");
+
+        devices.forEach((device) => {
+          device.addEventListener("mouseenter", () => {
+            device.style.transform += " scale(1.05)";
+            device.style.zIndex = "10";
+          });
+
+          device.addEventListener("mouseleave", () => {
+            device.style.transform = device.style.transform.replace(
+              " scale(1.05)",
+              ""
+            );
+            device.style.zIndex = "1";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

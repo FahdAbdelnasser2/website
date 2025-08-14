@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم المتطورة</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom Font */
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+
+      /* Global Styles */
+      body {
+        background: linear-gradient(135deg, #428315cc 0%, #0b555e 100%);
+        min-height: 100vh;
+        margin: 0;
+        direction: rtl;
+      }
+
+      /* Custom Navbar */
+      .custom-navbar {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        color: white !important;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-top: 100px;
+        padding: 20px;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 60px 20px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-title {
+        color: white;
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+
+      /* Search Container */
+      .search-container {
+        position: relative;
+        max-width: 500px;
+        margin: 30px auto;
+      }
+
+      .search-input {
+        height: 55px;
+        border-radius: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1.1rem;
+        padding-right: 50px;
+        backdrop-filter: blur(20px);
+        transition: all 0.3s ease;
+      }
+
+      .search-input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.2rem;
+      }
+
+      /* Dashboard Cards */
+      .dashboard-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 25px 20px;
+        text-align: center;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        height: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dashboard-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .dashboard-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #428315cc 0%, #0b555e 100%);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .dashboard-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      /* Card Icons */
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 1.8rem;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .dashboard-card:hover .card-icon {
+        transform: rotateY(360deg) scale(1.1);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Gradient Classes */
+      .gradient-orange {
+        background: linear-gradient(135deg, #ff9a56, #ffad56);
+      }
+      .gradient-blue {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+      }
+      .gradient-teal {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+      }
+      .gradient-blue-dark {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .gradient-purple {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      }
+      .gradient-yellow {
+        background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      }
+      .gradient-dark-blue {
+        background: linear-gradient(135deg, #2980b9, #6bb6ff);
+      }
+      .gradient-green {
+        background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+      }
+      .gradient-orange-red {
+        background: linear-gradient(135deg, #ff8a80, #ff5722);
+      }
+      .gradient-red {
+        background: linear-gradient(135deg, #ff5f6d, #ffc371);
+      }
+      .gradient-purple-pink {
+        background: linear-gradient(135deg, #c471f5, #fa71cd);
+      }
+      .gradient-teal-blue {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+      }
+      .gradient-blue-light {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+      }
+      .gradient-pink {
+        background: linear-gradient(135deg, #fd79a8, #e84393);
+      }
+      .gradient-cyan {
+        background: linear-gradient(135deg, #17ead9, #6078ea);
+      }
+      .gradient-green-light {
+        background: linear-gradient(135deg, #7bed9f, #70a1ff);
+      }
+      .gradient-orange-yellow {
+        background: linear-gradient(135deg, #ffa726, #ffcc02);
+      }
+      .gradient-yellow-orange {
+        background: linear-gradient(135deg, #f0932b, #eb4d4b);
+      }
+      .gradient-purple-dark {
+        background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      }
+      .gradient-indigo {
+        background: linear-gradient(135deg, #5f27cd, #00d2d3);
+      }
+      .gradient-blue-purple {
+        background: linear-gradient(135deg, #3742fa, #2f3542);
+      }
+      .gradient-teal-green {
+        background: linear-gradient(135deg, #0be881, #05c46b);
+      }
+      .gradient-orange-dark {
+        background: linear-gradient(135deg, #ff3838, #ff9500);
+      }
+      .gradient-purple-blue {
+        background: linear-gradient(135deg, #833ab4, #405de6);
+      }
+
+      /* Card Title */
+      .card-title {
+        color: #2d3748;
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin: 0;
+        line-height: 1.3;
+        transition: all 0.3s ease;
+      }
+
+      .dashboard-card:hover .card-title {
+        color: #1a202c;
+        transform: translateY(-2px);
+      }
+
+      /* Card Overlay */
+      .card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #428315cc 0%, #0b555e 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+        border-radius: 20px;
+      }
+
+      .dashboard-card:hover .card-overlay {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .card-overlay p {
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+        margin: 0;
+      }
+
+      /* Filter Section */
+      .filter-section {
+        text-align: center;
+      }
+
+      .filter-title {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 25px;
+      }
+
+      .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        border-radius: 50px;
+        padding: 12px 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(20px);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Animation Classes */
+      .fade-out {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+      }
+
+      .fade-in {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.3s ease;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        .search-input {
+          height: 50px;
+          font-size: 1rem;
+        }
+
+        .dashboard-card {
+          height: 140px;
+          padding: 20px 15px;
+        }
+
+        .card-icon {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+
+        .card-title {
+          font-size: 0.9rem;
+        }
+
+        .filter-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .filter-btn {
+          width: 200px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .main-content {
+          padding: 10px;
+        }
+
+        .hero-section {
+          padding: 40px 15px;
+        }
+
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .dashboard-card {
+          height: 120px;
+          padding: 15px 10px;
+        }
+
+        .card-icon {
+          width: 45px;
+          height: 45px;
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+        }
+
+        .card-title {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Loading Animation */
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">
+          <i class="fas fa-cube me-2"></i>
+          لوحة التحكم المتطورة
+        </a>
+        <div class="navbar-nav ms-auto">
+          <div class="nav-item">
+            <button class="btn btn-outline-light btn-sm rounded-pill">
+              <i class="fas fa-user me-1"></i>
+              الملف الشخصي
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+              <!-- Category Filters -->
+      <div class="filter-section">
+        <div class="text-center mb-4">
+          <h4 class="filter-title">تصفية حسب الفئة</h4>
+          <div class="filter-buttons">
+            <button class="btn filter-btn active" data-filter="all">
+              <i class="fas fa-th-large me-1"></i>
+              الكل
+            </button>
+            <button class="btn filter-btn" data-filter="management">
+              <i class="fas fa-users-cog me-1"></i>
+              الإدارة
+            </button>
+            <button class="btn filter-btn" data-filter="finance">
+              <i class="fas fa-coins me-1"></i>
+              المالية
+            </button>
+            <button class="btn filter-btn" data-filter="marketing">
+              <i class="fas fa-bullhorn me-1"></i>
+              التسويق
+            </button>
+            <button class="btn filter-btn" data-filter="digital">
+              <i class="fas fa-laptop me-1"></i>
+              الرقمية
+            </button>
+            <button class="btn filter-btn" data-filter="analytics">
+              <i class="fas fa-chart-line me-1"></i>
+              التحليلات
+            </button>
+          </div>
+          <div class="search-container mx-auto">
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="ابحث عن الخدمة التي تريدها..."
+            />
+            <i class="fas fa-search search-icon"></i>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard Sections -->
+      <div class="row g-4" id="dashboardGrid">
+        <!-- الاشتراكات -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="management">
+            <div class="card-icon gradient-orange">
+              <i class="fas fa-users"></i>
+            </div>
+            <h6 class="card-title">الاشتراكات</h6>
+            <div class="card-overlay">
+              <p>إدارة اشتراكات العملاء</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- الاستوديو -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="creative">
+            <div class="card-icon gradient-blue">
+              <i class="fas fa-video"></i>
+            </div>
+            <h6 class="card-title">الاستوديو</h6>
+            <div class="card-overlay">
+              <p>إنتاج ومونتاج المحتوى</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- إدارة علاقات العملاء -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="management">
+            <div class="card-icon gradient-teal">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h6 class="card-title">إدارة علاقات العملاء</h6>
+            <div class="card-overlay">
+              <p>CRM متكامل للعملاء</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التوقيع الإلكتروني -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="digital">
+            <div class="card-icon gradient-blue-dark">
+              <i class="fas fa-signature"></i>
+            </div>
+            <h6 class="card-title">التوقيع الإلكتروني</h6>
+            <div class="card-overlay">
+              <p>توقيع المستندات إلكترونياً</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المعرفة -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="knowledge">
+            <div class="card-icon gradient-purple">
+              <i class="fas fa-bookmark"></i>
+            </div>
+            <h6 class="card-title">المعرفة</h6>
+            <div class="card-overlay">
+              <p>قاعدة معلومات شاملة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المحاسبة -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="finance">
+            <div class="card-icon gradient-yellow">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h6 class="card-title">المحاسبة</h6>
+            <div class="card-overlay">
+              <p>إدارة مالية متكاملة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- الجداول الزمنية -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="planning">
+            <div class="card-icon gradient-dark-blue">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h6 class="card-title">الجداول الزمنية</h6>
+            <div class="card-overlay">
+              <p>تخطيط وجدولة المهام</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المشروع -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="management">
+            <div class="card-icon gradient-green">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h6 class="card-title">المشروع</h6>
+            <div class="card-overlay">
+              <p>إدارة المشاريع بكفاءة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المستندات -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="digital">
+            <div class="card-icon gradient-orange-red">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <h6 class="card-title">المستندات</h6>
+            <div class="card-overlay">
+              <p>أرشفة ومشاركة الملفات</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المنافسة -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="analytics">
+            <div class="card-icon gradient-red">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h6 class="card-title">المنافسة</h6>
+            <div class="card-overlay">
+              <p>تحليل السوق والمنافسين</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- نقطة البيع -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="sales">
+            <div class="card-icon gradient-purple-pink">
+              <i class="fas fa-cash-register"></i>
+            </div>
+            <h6 class="card-title">نقطة البيع</h6>
+            <div class="card-overlay">
+              <p>نظام POS متكامل</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التأخير -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="planning">
+            <div class="card-icon gradient-teal-blue">
+              <i class="fas fa-stopwatch"></i>
+            </div>
+            <h6 class="card-title">التأخير</h6>
+            <div class="card-overlay">
+              <p>متابعة التأخيرات</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التسويق الإلكتروني -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="marketing">
+            <div class="card-icon gradient-blue-light">
+              <i class="fas fa-paper-plane"></i>
+            </div>
+            <h6 class="card-title">التسويق الإلكتروني</h6>
+            <div class="card-overlay">
+              <p>حملات تسويقية ذكية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التسويق الاجتماعي -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="marketing">
+            <div class="card-icon gradient-pink">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h6 class="card-title">التسويق الاجتماعي</h6>
+            <div class="card-overlay">
+              <p>إدارة وسائل التواصل</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- الموقع الإلكتروني -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="digital">
+            <div class="card-icon gradient-cyan">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h6 class="card-title">الموقع الإلكتروني</h6>
+            <div class="card-overlay">
+              <p>بناء مواقع احترافية</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- مكتب المساعدة -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="support">
+            <div class="card-icon gradient-green-light">
+              <i class="fas fa-life-ring"></i>
+            </div>
+            <h6 class="card-title">مكتب المساعدة</h6>
+            <div class="card-overlay">
+              <p>دعم فني متميز</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التخطيط -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="planning">
+            <div class="card-icon gradient-orange-yellow">
+              <i class="fas fa-map"></i>
+            </div>
+            <h6 class="card-title">التخطيط</h6>
+            <div class="card-overlay">
+              <p>تخطيط استراتيجي شامل</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- الخدمة الميدانية -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="service">
+            <div class="card-icon gradient-yellow-orange">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h6 class="card-title">الخدمة الميدانية</h6>
+            <div class="card-overlay">
+              <p>خدمات ميدانية متطورة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- لوحة البيانات -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="analytics">
+            <div class="card-icon gradient-purple-dark">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <h6 class="card-title">لوحة البيانات</h6>
+            <div class="card-overlay">
+              <p>تحليلات ذكية للبيانات</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- الموارد البشرية -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="hr">
+            <div class="card-icon gradient-indigo">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <h6 class="card-title">الموارد البشرية</h6>
+            <div class="card-overlay">
+              <p>إدارة شاملة للموظفين</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المبيعات -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="sales">
+            <div class="card-icon gradient-blue-purple">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h6 class="card-title">المبيعات</h6>
+            <div class="card-overlay">
+              <p>تتبع وإدارة المبيعات</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- التصنيع -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="manufacturing">
+            <div class="card-icon gradient-teal-green">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h6 class="card-title">التصنيع</h6>
+            <div class="card-overlay">
+              <p>إدارة عمليات الإنتاج</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المخزون -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="inventory">
+            <div class="card-icon gradient-orange-dark">
+              <i class="fas fa-boxes"></i>
+            </div>
+            <h6 class="card-title">المخزون</h6>
+            <div class="card-overlay">
+              <p>تتبع المخزون بدقة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- المشتريات -->
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+          <div class="dashboard-card" data-category="purchase">
+            <div class="card-icon gradient-purple-blue">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h6 class="card-title">المشتريات</h6>
+            <div class="card-overlay">
+              <p>إدارة متكاملة للمشتريات</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Search functionality
+        const searchInput = document.querySelector(".search-input");
+        const dashboardCards = document.querySelectorAll(".dashboard-card");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+
+        // Search feature
+        searchInput.addEventListener("input", function () {
+          const searchTerm = this.value.toLowerCase().trim();
+
+          dashboardCards.forEach((card) => {
+            const cardTitle = card
+              .querySelector(".card-title")
+              .textContent.toLowerCase();
+            const cardOverlay = card
+              .querySelector(".card-overlay p")
+              .textContent.toLowerCase();
+
+            if (
+              cardTitle.includes(searchTerm) ||
+              cardOverlay.includes(searchTerm)
+            ) {
+              card.style.display = "block";
+              card.classList.remove("fade-out");
+              card.classList.add("fade-in");
+            } else {
+              card.classList.add("fade-out");
+              card.classList.remove("fade-in");
+              setTimeout(() => {
+                if (card.classList.contains("fade-out")) {
+                  card.style.display = "none";
+                }
+              }, 300);
+            }
+          });
+        });
+
+        // Filter functionality
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filterValue = this.getAttribute("data-filter");
+
+            dashboardCards.forEach((card) => {
+              const cardCategory = card.getAttribute("data-category");
+
+              if (filterValue === "all" || cardCategory === filterValue) {
+                card.style.display = "block";
+                card.classList.remove("fade-out");
+                card.classList.add("fade-in");
+              } else {
+                card.classList.add("fade-out");
+                card.classList.remove("fade-in");
+                setTimeout(() => {
+                  if (card.classList.contains("fade-out")) {
+                    card.style.display = "none";
+                  }
+                }, 300);
+              }
+            });
+          });
+        });
+
+        // Card click animation
+        dashboardCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            // Add click effect
+            this.style.transform = "scale(0.95)";
+            setTimeout(() => {
+              this.style.transform = "";
+            }, 150);
+
+            // Add ripple effect
+            const ripple = document.createElement("div");
+            ripple.classList.add("ripple");
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationDelay = Math.random() * 0.5 + "s";
+              entry.target.classList.add("animate-in");
+            }
+          });
+        }, observerOptions);
+
+        dashboardCards.forEach((card) => {
+          observer.observe(card);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", function () {
+          const navbar = document.querySelector(".custom-navbar");
+          if (window.scrollY > 100) {
+            navbar.style.background = "rgba(255, 255, 255, 0.2)";
+            navbar.style.backdropFilter = "blur(25px)";
+          } else {
+            navbar.style.background = "rgba(255, 255, 255, 0.1)";
+            navbar.style.backdropFilter = "blur(20px)";
+          }
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function (e) {
+          // Press '/' to focus search
+          if (e.key === "/") {
+            e.preventDefault();
+            searchInput.focus();
+          }
+
+          // Press Escape to clear search
+          if (e.key === "Escape") {
+            searchInput.value = "";
+            searchInput.blur();
+            // Show all cards
+            dashboardCards.forEach((card) => {
+              card.style.display = "block";
+              card.classList.remove("fade-out");
+              card.classList.add("fade-in");
+            });
+          }
+        });
+
+        // Add loading animation to cards on page load
+        dashboardCards.forEach((card, index) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(20px)";
+
+          setTimeout(() => {
+            card.style.transition = "all 0.6s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, index * 50);
+        });
+
+        // Dynamic background particles
+        createBackgroundParticles();
+
+        function createBackgroundParticles() {
+          const particleCount = 50;
+
+          for (let i = 0; i < particleCount; i++) {
+            createParticle();
+          }
+        }
+
+        function createParticle() {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.cssText = `
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: float ${Math.random() * 6 + 4}s infinite linear;
+            left: ${Math.random() * 100}vw;
+            animation-delay: ${Math.random() * 6}s;
+        `;
+
+          document.body.appendChild(particle);
+
+          // Remove particle after animation
+          setTimeout(() => {
+            particle.remove();
+            createParticle(); // Create new particle
+          }, (Math.random() * 6 + 4) * 1000);
+        }
+
+        // Add CSS animation for particles
+        const style = document.createElement("style");
+        style.textContent = `
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .animate-in {
+            animation: slideInUp 0.6s ease forwards;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            width: 100px;
+            height: 100px;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+        document.head.appendChild(style);
+      });
+
+      // Performance optimization: Debounce search
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Service Worker for caching (Progressive Web App)
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
