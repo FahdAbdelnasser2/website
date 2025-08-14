@@ -632,6 +632,40 @@
         right: 45%;
         animation-delay: 3s;
       }
+      [dir="ltr"] .floating-1 {
+        top: 10%;
+        left: 30%;
+        right: unset;
+        animation-delay: 0s;
+      }
+
+      [dir="ltr"] .floating-2 {
+        top: 60%;
+        right: 90%;
+        left: unset;
+        animation-delay: 2s;
+      }
+
+      [dir="ltr"] .floating-3 {
+        top: 28%;
+        right: 80%;
+        left: unset;
+        animation-delay: 4s;
+      }
+
+      [dir="ltr"] .floating-4 {
+        top: 75%;
+        left: 40%;
+        right: unset;
+        animation-delay: 1s;
+      }
+
+      [dir="ltr"] .floating-5 {
+        top: 35%;
+        left: 45%;
+        right: unset;
+        animation-delay: 3s;
+      }
 
       @keyframes float {
 
@@ -751,7 +785,7 @@
       .whatsapp-btn i,
       .demo-btn i {
         margin-left: 4px;
-        vertical-align: middle;
+        vertical-align: text-top;
       }
 
       [dir="ltr"] .whatsapp-btn i,
